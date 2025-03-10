@@ -18,14 +18,14 @@
     "globalTeardown": "./tests/teardown.js"
   },
   "dependencies": {
-    "cross-env": "^7.0.3",
     "bcryptjs": "^2.4.3",
     "colors": "^1.4.0",
     "cors": "^2.8.5",
+    "cross-env": "^7.0.3",
     "dotenv": "^16.4.5",
     "express": "^4.21.0",
     "jsonwebtoken": "^9.0.2",
-    "mongoose": "^8.6.3",
+    "mongoose": "^8.12.1",
     "validator": "^13.12.0"
   },
   "overrides": {
@@ -33,6 +33,7 @@
   },
   "devDependencies": {
     "jest": "^29.7.0",
+    "mongodb-memory-server": "^10.1.4",
     "nodemon": "^3.1.7",
     "supertest": "^7.0.0"
   }

@@ -7,13 +7,19 @@ const getAllProperties = async (req, res) => {
     const properties = await Property.find();
     res.status(200).json(properties);
   } catch (error) {
-    res.status(500).json({ error: "Failed to fetch properties" });
+    res.status(500).json({ error: "Failed to fetch properties", details: error.message });
   }
 };
 
 // POST a new property
 const createProperty = async (req, res) => {
   try {
+    // Check if required fields are present
+    const { name, address, price } = req.body;
+    if (!name || !address || !price) {
+      return res.status(400).json({ error: "Missing required fields" });
+    }
+
     const newProperty = new Property(req.body);
     const savedProperty = await newProperty.save();
     res.status(201).json(savedProperty);
@@ -23,16 +29,25 @@ const createProperty = async (req, res) => {
 };
 
 // GET /properties/:propertyId
+// GET /properties/:propertyId
 const getPropertyById = async (req, res) => {
+  const { propertyId } = req.params;
+
+  // Check if the ID is a valid MongoDB ObjectId
+  if (!mongoose.Types.ObjectId.isValid(propertyId)) {
+    return res.status(400).json({ error: "Invalid property ID" });
+  }
+
   try {
-    const property = await Property.findById(req.params.propertyId);
-    
+    const property = await Property.findById(propertyId);
+
     if (!property) {
       return res.status(404).json({ error: "Property not found" });
     }
 
     res.status(200).json(property);
   } catch (error) {
+    console.error("Error fetching property:", error);
     res.status(500).json({ error: "Failed to fetch property", details: error.message });
   }
 };
