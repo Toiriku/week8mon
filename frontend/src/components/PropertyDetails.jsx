@@ -52,6 +52,11 @@ const PropertyPage = () => {
     deleteProperty(propertyId);
   };
 
+  const onEditClick = (propertyId) => {
+    // Navigate to the Edit page with the property ID
+    navigate(`/edit-property/${propertyId}`);
+  };
+
   return (
     <div className="property-preview">
       {loading ? (
@@ -68,6 +73,7 @@ const PropertyPage = () => {
           <p><strong>Square Feet:</strong> {property.squareFeet} sqft</p>
           <p><strong>Year Built:</strong> {property.yearBuilt}</p>
           <button onClick={() => onDeleteClick(property._id)}>Delete Property</button>
+          <button onClick={() => onEditClick(property._id)}>Edit Property</button>
         </>
       )}
     </div>

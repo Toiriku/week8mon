@@ -6,6 +6,7 @@ import AddPropertyPage from "./pages/AddPropertyPage";
 import Navbar from "./components/Navbar";
 import NotFoundPage from "./pages/NotFoundPage";
 import PropertyDetails from "./components/PropertyDetails";
+import EditPropertyPage from "./components/EditProperty";
 
 const App = () => {
   return (
@@ -18,6 +19,7 @@ const App = () => {
             <Route path="/add-property" element={<AddPropertyPage />} />
             <Route path="/property/:id" element={<PropertyDetails />} />
             <Route path="*" element={<NotFoundPage />} />
+            <Route path="/edit-property/:id" element={<EditPropertyPage />} />
           </Routes>
         </div>
       </BrowserRouter>
