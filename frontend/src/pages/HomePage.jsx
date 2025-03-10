@@ -1,9 +1,9 @@
-import PropertyListings from "../components/PropertyListings";
+import PropertyListing from "../components/PropertyListing";
 
 const Home = () => {
   return (
     <div className="home">
-      <PropertyListings  />
+      <PropertyListing  />
     </div>
   );
 };
