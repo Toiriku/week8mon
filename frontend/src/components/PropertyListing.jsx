@@ -1,26 +1,39 @@
 import { useState, useEffect } from "react";
-import mockProperties from "./MockProperties"; // Import mock data
+import { Link } from "react-router-dom";
 
 const PropertyListing = () => {
   const [properties, setProperties] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
-    // Simulate API call delay
-    setTimeout(() => {
-      setProperties(mockProperties); // Use mock data
-    }, 500);
+    fetch('/api/property')
+      .then((response) => response.json())
+      .then((data) => {
+        setProperties(data);
+        setLoading(false);
+      })
+      .catch((err) => {
+        console.error(err);
+        setError('Error fetching properties');
+        setLoading(false);
+      });
   }, []);
 
   return (
-    <div className="property-listing">
+    <div className="property-list">
       <h2>Available Properties</h2>
       <div className="property-grid">
-        {properties.length === 0 ? (
+        {loading ? (
           <p>Loading properties...</p>
+        ) : error ? (
+          <p>{error}</p>
         ) : (
           properties.map((property) => (
             <div key={property._id} className="property-card">
-              <h3>{property.title}</h3>
+              <Link to={`/property/${property._id}`}>
+                <h3>{property.title}</h3>
+              </Link>
               <p><strong>Type:</strong> {property.type}</p>
               <p><strong>Price:</strong> ${property.price.toLocaleString()}</p>
               <p><strong>Location:</strong> {property.location.city}, {property.location.state}</p>

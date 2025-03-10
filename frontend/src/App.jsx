@@ -4,24 +4,25 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./pages/HomePage";
 import AddPropertyPage from "./pages/AddPropertyPage";
 import Navbar from "./components/Navbar";
-import NotFoundPage from "./pages/NotFoundPage"
+import NotFoundPage from "./pages/NotFoundPage";
+import PropertyDetails from "./components/PropertyDetails";
 
 const App = () => {
+  return (
+    <div className="App">
+      <BrowserRouter>
+        <Navbar />
+        <div className="content">
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/add-property" element={<AddPropertyPage />} />
+            <Route path="/property/:id" element={<PropertyDetails />} />
+            <Route path="*" element={<NotFoundPage />} />
+          </Routes>
+        </div>
+      </BrowserRouter>
+    </div>
+  );
+};
 
-    return (
-      <div className="App">
-        <BrowserRouter>
-          <Navbar />
-          <div className="content">
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/add-property" element={<AddPropertyPage />} />
-              <Route path='*' element={<NotFoundPage />} />
-            </Routes>
-          </div>
-        </BrowserRouter>
-      </div>
-    );
-  }
-  
-  export default App;
+export default App;
